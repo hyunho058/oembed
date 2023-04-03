@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class AddAndSubtractTest {
+class Required05AddAndSubtractTest {
     @ParameterizedTest
     @MethodSource("inputAndResult")
     void solution(int input, String result) {
-        var algorithm = new AddAndSubtract();
-        System.out.println("start-----------------");
+        var algorithm = new Required05AddAndSubtract();
+
         assertEquals(result, algorithm.findFruit(input));
     }
 

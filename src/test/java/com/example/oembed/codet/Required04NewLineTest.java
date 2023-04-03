@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class NewLineTest {
+class Required04NewLineTest {
     @ParameterizedTest
     @MethodSource("inputAndResult")
     void solution(String input, String result) {
-        var algorithm = new NewLine();
+        var algorithm = new Required04NewLine();
         assertEquals(result, algorithm.solution(input));
     }
 
@@ -30,7 +30,7 @@ class NewLineTest {
 
     @Test
     void 한글_포함_테스트(){
-        var algorithm = new NewLine();
+        var algorithm = new Required04NewLine();
         assertTrue(algorithm.isKorean('가'));
         assertTrue(algorithm.isKorean('쀍'));
         assertTrue(algorithm.isKorean('핳'));

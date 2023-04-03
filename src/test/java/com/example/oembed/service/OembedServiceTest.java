@@ -8,10 +8,7 @@ import com.example.oembed.infra.feign.YoutubeClient;
 import com.example.oembed.vo.TwitterContent;
 import com.example.oembed.vo.VimeoContent;
 import com.example.oembed.vo.YoutubeContent;
-
 import com.google.gson.Gson;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,11 +19,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class OembedServiceTest {
@@ -43,7 +38,7 @@ class OembedServiceTest {
     @Test
     void JSON_파일_변환_테스트() throws FileNotFoundException {
         BufferedReader exhibitionInfoBuffer =
-                new BufferedReader(new FileReader("src/test/resources/oembed-json/youtube.json"));
+            new BufferedReader(new FileReader("src/test/resources/oembed-json/youtube.json"));
         YoutubeContent youtubeContent = gson.fromJson(exhibitionInfoBuffer, YoutubeContent.class);
 
         assertEquals("video", youtubeContent.getType());
@@ -53,7 +48,7 @@ class OembedServiceTest {
     void youtube_oembed_호출_성공() throws FileNotFoundException {
         //given
         BufferedReader exhibitionInfoBuffer =
-                new BufferedReader(new FileReader("src/test/resources/oembed-json/youtube.json"));
+            new BufferedReader(new FileReader("src/test/resources/oembed-json/youtube.json"));
 
         YoutubeContent youtubeContent = gson.fromJson(exhibitionInfoBuffer, YoutubeContent.class);
         String requestUrl = "https://www.youtube.com/watch?v=dBD54EZIrZo";
@@ -72,7 +67,7 @@ class OembedServiceTest {
     void twitter_oembed_호출_성공() throws FileNotFoundException {
         //given
         BufferedReader exhibitionInfoBuffer =
-                new BufferedReader(new FileReader("src/test/resources/oembed-json/twitter.json"));
+            new BufferedReader(new FileReader("src/test/resources/oembed-json/twitter.json"));
 
         TwitterContent twitterContent = gson.fromJson(exhibitionInfoBuffer, TwitterContent.class);
         String requestUrl = "https://twitter.com/hellopolicy/status/867177144815804416";
@@ -91,7 +86,7 @@ class OembedServiceTest {
     void vimeo_oembed_호출_성공() throws FileNotFoundException {
         //given
         BufferedReader exhibitionInfoBuffer =
-                new BufferedReader(new FileReader("src/test/resources/oembed-json/vimeo.json"));
+            new BufferedReader(new FileReader("src/test/resources/oembed-json/vimeo.json"));
 
         VimeoContent vimeoContent = gson.fromJson(exhibitionInfoBuffer, VimeoContent.class);
         String requestUrl = "https://vimeo.com/20097015";
@@ -113,7 +108,7 @@ class OembedServiceTest {
 
         //when, then
         assertThrows(
-                IllegalArgumentException.class,
-                () -> oembedService.getContents(ContentDto.of(requestUrl)));
+            IllegalArgumentException.class,
+            () -> oembedService.getContents(ContentDto.of(requestUrl)));
     }
 }

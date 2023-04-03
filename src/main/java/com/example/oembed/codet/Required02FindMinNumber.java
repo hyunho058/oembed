@@ -2,7 +2,7 @@ package com.example.oembed.codet;
 
 import java.util.Arrays;
 
-public class FindMinNumber {
+public class Required02FindMinNumber {
     public int find(int[] numbers){
         Arrays.sort(numbers);
         int result = 0;

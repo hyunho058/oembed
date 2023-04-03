@@ -9,11 +9,11 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class FindMinNumberTest {
+class Required02FindMinNumberTest {
     @ParameterizedTest
     @MethodSource("inputAndResult")
     void solution(int[] numbers, int result) {
-        var algorithm = new FindMinNumber();
+        var algorithm = new Required02FindMinNumber();
         assertEquals(result, algorithm.find(numbers));
     }
 

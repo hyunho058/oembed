@@ -1,6 +1,6 @@
 package com.example.oembed.codet;
 
-public class AddAndSubtract {
+public class Required05AddAndSubtract {
     public String findFruit(int num) {
 
         String[] fruits = {"kiwi", "pear", "kiwi", "banana", "melon", "banana", "melon", "pineapple", "apple"};

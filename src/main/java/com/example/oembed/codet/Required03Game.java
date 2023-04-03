@@ -1,6 +1,6 @@
 package com.example.oembed.codet;
 
-public class Game {
+public class Required03Game {
 
     public static final int VICTORY = 3;
     public static final int TIE = 1;

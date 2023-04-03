@@ -1,7 +1,7 @@
 package com.example.oembed.codet;
 
 
-public class NewLine {
+public class Required04NewLine {
     public String solution(String s) {
         StringBuilder sb = new StringBuilder();
         int characterCount = 0;

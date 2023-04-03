@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class GameTest {
+class Required03GameTest {
 
     @ParameterizedTest
     @MethodSource("inputAndResult")
     void solution(String[] games, int result) {
-        var victoryPoint = new Game();
+        var victoryPoint = new Required03Game();
         assertEquals(result, victoryPoint.victoryPoint(games));
     }
 

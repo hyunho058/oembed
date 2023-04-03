@@ -9,11 +9,11 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class QuarterCalculateTest {
+class Required01QuarterCalculateTest {
     @ParameterizedTest
     @MethodSource("inputAndResult")
     void solution(int month, int result) {
-        var calculator = new QuarterCalculate();
+        var calculator = new Required01QuarterCalculate();
         assertEquals(result, calculator.quarterCalculate(month));
     }
 

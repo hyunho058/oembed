@@ -1,6 +1,6 @@
 package com.example.oembed.codet;
 
-public class QuarterCalculate {
+public class Required01QuarterCalculate {
 
     public static final int QUARTER = 3;
     public int quarterCalculate(int month) {
