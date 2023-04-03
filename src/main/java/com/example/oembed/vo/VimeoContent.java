@@ -1,16 +1,9 @@
 package com.example.oembed.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 
 @Getter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class VimeoContent {
     private String type;
     private double version;

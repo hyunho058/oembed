@@ -5,7 +5,6 @@ import lombok.Getter;
 
 @Getter
 public class TwitterContent {
-
     public String url;
     @JsonProperty("author_name")
     private String authorName;
