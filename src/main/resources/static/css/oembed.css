@@ -41,7 +41,7 @@ header {
     text-indent: 1em;
 }
 
-#input_Box > input[type="button"] {
+#input_Box > input[type="submit"] {
     width: 60px;
     height: 38px;
     font-size: 1em;
