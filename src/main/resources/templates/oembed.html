@@ -12,136 +12,139 @@
 <div class="container">
     <header>
         <div id="title">oEmbed Test</div>
-
-        <div id="input_Box">
-            <input type="text" placeholder="url을 입력해주세요" id="url"/>
-            <input type="button" value="확인" onclick="requestUrl()"></input>
-        </div>
+        <form class="m-t" role="form" action="/contents" method="get">
+            <div id="input_Box">
+                <input type="text" th:name="url" placeholder="url을 입력해주세요" id="url"/>
+                <input type="submit" value="확인"/>
+            </div>
+        </form>
     </header>
 
     <article>
         <div id="content_wrap">
-            <div id="title_container"></div>
-            <ul id="responseDataInContainer"></ul>
-<!--            <div th:class="custom-graph-div" th:if="${convert.html}" id="htmlImage">-->
-<!--                <div th:class="custom-graph-box">convert</div>-->
-<!--                <div th:text="${convert.html}"></div>-->
-<!--                <div th:utext="${convert.html}"></div>-->
-<!--            </div>-->
+            <div id="title_container" th:if="${contents!= null}">
+                <div>
+                    <div>title</div>
+                    <div th:if="${contents.title}">
+                        <div th:text="${contents.title}"></div>
+                    </div>
+                </div>
+            </div>
+
+            <ul id="responseDataInContainer" th:if="${contents!= null}">
+                <li>
+                    <div>type</div>
+                    <div th:if="${contents.type}">
+                        <div th:text="${contents.type}"></div>
+                    </div>
+                </li>
+                <li>
+                    <div>version</div>
+                    <div th:if="${contents.version}">
+                        <div th:text="${contents.version}"></div>
+                    </div>
+                </li>
+                <li>
+                    <div>provider_name</div>
+                    <div th:if="${contents.providerName}">
+                        <div th:text="${contents.providerName}"></div>
+                    </div>
+                </li>
+                <li>
+                    <div>provider_url</div>
+                    <div th:if="${contents.providerUrl}">
+                        <div th:text="${contents.providerUrl}"></div>
+                    </div>
+                </li>
+                <li>
+                    <div>author_name</div>
+                    <div th:if="${contents.authorName}">
+                        <div th:text="${contents.authorName}"></div>
+                    </div>
+                </li>
+                <li>
+                    <div>author_url</div>
+                    <div th:if="${contents.authorUrl}">
+                        <div th:text="${contents.authorUrl}"></div>
+                    </div>
+                </li>
+                <li th:if="${contents.isPlus}">
+                    <div>is_plus</div>
+                    <div th:text="${contents.isPlus}"></div>
+                </li>
+                <li>
+                    <div>html
+                        <br>
+                        <div th:text="${contents.htmlWidthPerHeight}"></div>
+                    </div>
+
+                    <div>
+                        <div th:text="${contents.html}"></div>
+                        <div th:if="${contents.html}">
+                            <div th:utext="${contents.html}"></div>
+                        </div>
+                    </div>
+                </li>
+                <li th:if="${contents.width}">
+                    <div>width</div>
+                    <div th:text="${contents.width}"></div>
+                </li>
+                <li th:if="${contents.height}">
+                    <div>height</div>
+                    <div th:text="${contents.height}"></div>
+                </li>
+
+                <li th:if="${contents.duration}">
+                    <div>duration</div>
+                    <div th:text="${contents.duration}"></div>
+                </li>
+                <li th:if="${contents.description}">
+                    <div>description</div>
+                    <div th:text="${contents.description}"></div>
+                </li>
+                <li th:if="${contents.thumbnailUrl}">
+                    <div>thumbnail_url
+                        <br>
+                        <div th:text="${contents.htmlWidthPerHeight}"></div>
+                    </div>
+                    <div>
+                        <div><img th:src="${contents.thumbnailUrl}"></div>
+                        <div th:text="${contents.thumbnailUrl}"></div>
+                    </div>
+                </li>
+
+                <li th:if="${contents.thumbnailWidth}">
+                    <div>thumbnail_width</div>
+                    <div th:text="${contents.thumbnailWidth}"></div>
+                </li>
+                <li th:if="${contents.thumbnailHeight}">
+                    <div>thumbnail_height</div>
+                    <div th:text="${contents.thumbnailHeight}"></div>
+                </li>
+                <li th:if="${contents.thumbnailUrlWithPlayButton}">
+                    <div>thumbnail_url_with_play_button</div>
+                    <div>
+                        <a th:href="@{contents.thumbnailUrlWithPlayButton}"
+                           th:text="${contents.thumbnailUrlWithPlayButton}"></a>
+                    </div>
+                </li>
+                <li th:if="${contents.uploadDate}">
+                    <div>upload_date</div>
+                    <div th:text="${contents.uploadDate}"></div>
+                </li>
+                <li th:if="${contents.videoId}">
+                    <div>video_id</div>
+                    <div th:text="${contents.videoId}"></div>
+                </li>
+                <li th:if="${contents.uri}">
+                    <div>url</div>
+                    <div th:text="${contents.uri}"></div>
+                </li>
+            </ul>
         </div>
     </article>
 </div>
 
-<!-- /container -->
 </body>
 </html>
 
-<script>
-    function requestUrl() {
-        const url = document.getElementById('url').value;
-        //oembedResponse에서 데이터 response
-
-        fetch('contents?url=' + url)
-            .then((resolvedData) => {
-                resolvedData.json()
-                    .then((json) => {
-                        const render = document.getElementById('responseDataInContainer');
-                        const render2 = document.getElementById('title_container');
-                        // let tttt = document.getElementById("htmlImage");
-                        // 다른 url 입력했을 경우 초기화 해줘야 한다
-                        render.innerHTML = "";
-                        render2.innerHTML = "";
-                        console.log("test");
-
-                        // 더 나은 방법은 json에 있는 데이터를 Map으로 저장하고
-                        // Map으로 받아서 해당 컬렉션 안에 있는 모든 데이터를 꺼내는게 더 효율적이라 생각한다
-                        // 다만, 예제에 나와있는 순서대로 정렬하고 싶어서 이 방법으로 하자!
-                        let titleData = "";
-                        if (json.title != null) {
-                            titleData = "<div><div>title</div><div>" + json.title + "</div></div>";
-                            render2.innerHTML = titleData;
-                        }
-                        let viewData = "";
-                        if (json.type != null) {
-                            viewData += "<li>" + "<div>type</div><div>" + json.type + "</div></li>";
-                        }
-                        if (json.version != null) {
-                            viewData += "<li>" + "<div>version</div><div>" + json.version + "</div></li>";
-                        }
-                        if (json.providerName != null) {
-                            viewData += "<li>" + "<div>providerName</div><div>" + json.providerName + "</div></li>";
-                        }
-                        if (json.providerUrl != null) {
-                            viewData += "<li>" + "<div>providerUrl</div><div><a href='" + json.providerUrl + "'>"
-                                + json.providerUrl + "</a></div></li>";
-                        }
-                        if (json.authorName != null) {
-                            viewData += "<li>" + "<div>authorName</div><div>" + json.authorName + "</div></li>";
-                        }
-                        if (json.authorUrl != null) {
-                            viewData += "<li>" + "<div>authorUrl</div><div><a href='" + json.authorUrl + "'>"
-                                + json.authorUrl + "</a></div></li>";
-                        }
-                        if (json.isPlus != null) {
-                            viewData += "<li>" + "<div>isPlus</div><div>" + json.isPlus + "</div></li>";
-                        }
-                        if (json.html != null) {
-                            // tttt = json.html;
-                            viewData += "<li>" + "<div>html<br/>(" + json.width + "/" + json.height + ")</div>" +
-                                "<div><xmp>" + json.html + "</xmp><" + json.html + "</div>" + "</li>";
-                        }
-                        if (json.width != null) {
-                            viewData += "<li>" + "<div>width</div><div>" + json.width + "</div></li>";
-                        }
-                        if (json.height != null) {
-                            viewData += "<li>" + "<div>height</div><div>" + json.height + "</div></li>";
-                        }
-                        if (json.duration != null) {
-                            viewData += "<li>" + "<div>height</div><div>" + json.duration + "</div></li>";
-                        }
-                        if (json.description != null) {
-                            viewData += "<li>" + "<div>height</div><div>" + json.description + "</div></li>";
-                        }
-                        if (json.thumbnailUrl != null) {
-                            viewData += "<li>" + "<div>thumbnailUrl<br/>" +
-                                "(" + json.thumbnailWidth + "/" + json.thumbnailHeight + ")</div>" +
-                                "<div><a href='" + json.thumbnailUrl + "'>" + json.thumbnailUrl + "</a>" +
-                                "<br/><br/><img src='" + json.thumbnailUrl + "'/></div></li>";
-                        }
-                        if (json.thumbnailWidth != null) {
-                            viewData += "<li>" + "<div>thumbnailWidth</div><div>" + json.thumbnailWidth + "</div></li>";
-                        }
-                        if (json.thumbnailHeight != null) {
-                            viewData += "<li>" + "<div>thumbnailHeight</div><div>" + json.thumbnailHeight + "</div></li>";
-                        }
-                        if (json.thumbnailUrlWithPlayButton != null) {
-                            viewData += "<li>" + "<div>thumbnailUrlWithPlayButton</div><div>" +
-                                "<a href='" + json.thumbnailUrlWithPlayButton + "'>" + json.thumbnailUrlWithPlayButton + "</a></div></li>";
-                        }
-                        if (json.uploadData != null) {
-                            viewData += "<li>" + "<div>uploadData</div><div>" + json.uploadData + "</div></li>";
-                        }
-                        if (json.videoId != null) {
-                            viewData += "<li>" + "<div>videoId</div><div>" + json.videoId + "</div></li>";
-                        }
-                        if (json.uri != null) {
-                            viewData += "<li>" + "<div>uri</div><div>" + json.uri + "</div></li>";
-                        }
-                        if (json.cacheAge != null) {
-                            viewData += "<li>" + "<div>cacheAge</div><div>" + json.cacheAge + "</div></li>";
-                        }
-
-                        render.innerHTML = viewData;
-                        console.log(json);
-                    }).catch((err) => {
-                    alert('00000유요하지 않은 주소입니다.');
-                    console.log(err);
-                })
-            })
-            .catch((err) => {
-                alert('111111유요하지 않은 주소입니다.');
-                console.log(err);
-            });
-
-    }
-</script>
