@@ -9,12 +9,10 @@ import com.example.oembed.vo.TwitterContent;
 import com.example.oembed.vo.VimeoContent;
 import com.example.oembed.vo.YoutubeContent;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Log4j2
 public class OembedService {
     private final YoutubeClient youtubeClient;
     private final TwitterClient twitterClient;
@@ -22,7 +20,7 @@ public class OembedService {
 
     public ContentView getContents(ContentDto request) {
         String url = request.getUrl();
-        ContentView contentView = null;
+        ContentView contentView;
 
         switch (request.getMediaType()) {
             case YOUTUBE:
@@ -37,8 +35,8 @@ public class OembedService {
                 VimeoContent vimeoContent = vimeoClient.getContent(url);
                 contentView = ContentView.vimeoOf(vimeoContent);
                 break;
-            case EMPTY:
-                throw new IllegalArgumentException("유효한 서비스가 아닙니다");
+            default:
+                throw new IllegalArgumentException("유효한 서비스 요청이 아닙니다.");
         }
 
         return contentView;
