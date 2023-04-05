@@ -39,6 +39,8 @@
 
 ## 인스타그램 사용할 수 없는 이유
 * facebook 개발자 계정(엑세스 토큰)과 oEmbed 읽기 기능에 대한 앱 검수가 필요 하기 때문에 사용에 제한이 있습니다. 
-  * Facebook API를 통해 embed 코드를 생성하고 제공하고 있습니다. 따라서, Instagram을 oEmbed를 통해 검색하는 것은 불가능합니다.
+  * Facebook API를 통해 embed 코드를 생성하고 제공하며, Instagram을 oEmbed를 통해 검색하는 것은 제한이 있습니다.
   ![instagram](https://user-images.githubusercontent.com/58923731/229786935-f37e085e-06e1-4cc9-8766-11624a41a699.png)
-* [Reference](https://developers.facebook.com/docs/instagram/oembed)
+
+* Reference
+  * [Meta for developers](https://developers.facebook.com/docs/instagram/oembed)
